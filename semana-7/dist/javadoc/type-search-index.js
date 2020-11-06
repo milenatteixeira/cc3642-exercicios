@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"projeto_corona","l":"Hospital"},{"p":"projeto_corona","l":"Main"},{"p":"projeto_corona","l":"Mundo"},{"p":"projeto_corona","l":"Pessoa"},{"p":"projeto_corona","l":"PessoaDoente"},{"p":"projeto_corona","l":"PessoaSaudavel"},{"p":"projeto_corona","l":"Virus"}]

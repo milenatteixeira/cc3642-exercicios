@@ -1,0 +1,5 @@
+com/mycompany/factory/Rectangle.class
+com/mycompany/factory/ShapeFactory.class
+com/mycompany/factory/Circle.class
+com/mycompany/factory/Main.class
+com/mycompany/factory/Shape.class

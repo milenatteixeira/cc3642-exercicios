@@ -1,0 +1,6 @@
+com/mycompany/strategy/Main.class
+com/mycompany/strategy/Orcamento.class
+com/mycompany/strategy/Calculadora.class
+com/mycompany/strategy/Imposto.class
+com/mycompany/strategy/ICMS.class
+com/mycompany/strategy/ISS.class

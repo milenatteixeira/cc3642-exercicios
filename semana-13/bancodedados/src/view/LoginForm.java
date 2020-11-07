@@ -5,6 +5,14 @@
  */
 package view;
 
+import dao.AlunoDAO;
+import dao.Conexao;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+import model.Aluno;
+
 /**
  *
  * @author milena
@@ -46,6 +54,11 @@ public class LoginForm extends javax.swing.JFrame {
         loginSenha.setText("jPasswordField1");
 
         logar.setText("Entrar");
+        logar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logarActionPerformed(evt);
+            }
+        });
 
         jMenu1.setText("Cadastro");
 
@@ -105,6 +118,23 @@ public class LoginForm extends javax.swing.JFrame {
         cadastro.setLocationRelativeTo(null);
         cadastro.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void logarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logarActionPerformed
+        Aluno aluno = new Aluno(null, loginUsuario.getText(), loginSenha.getText());
+        Conexao conexao = new Conexao();
+        try {
+            Connection conn = conexao.getConnection();
+            AlunoDAO dao = new AlunoDAO(conn);
+            ResultSet res = dao.consultar(aluno);
+            if(res.next()){
+                JOptionPane.showMessageDialog(null, "Login concluído.", "Logado", JOptionPane.INFORMATION_MESSAGE);
+            }else{
+                JOptionPane.showMessageDialog(null, "Login não executado.", "Erro!", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (SQLException ex) {
+            System.out.println("Falha na conexão.");
+        }
+    }//GEN-LAST:event_logarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel2;

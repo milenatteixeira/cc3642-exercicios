@@ -3,6 +3,7 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.ResultSet;
 import model.Aluno;
 /**
  *
@@ -23,5 +24,15 @@ public class AlunoDAO {
         PreparedStatement statement = conn.prepareStatement(sql);
         statement.execute();
         conn.close();
+    }
+    
+    public ResultSet consultar(Aluno aluno) throws SQLException{
+        String sql = "SELECT * FROM aluno WHERE "
+                + "usuario = '"+aluno.getUsuario()+"'"
+                + "and senha = '"+aluno.getSenha()+"'";
+        PreparedStatement statement = conn.prepareStatement(sql);
+        statement.execute();
+        ResultSet resultado = statement.getResultSet();
+        return resultado;
     }
 }

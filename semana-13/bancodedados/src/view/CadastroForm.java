@@ -5,6 +5,13 @@
  */
 package view;
 
+import dao.AlunoDAO;
+import dao.Conexao;
+import java.sql.Connection;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import model.Aluno;
+
 /**
  *
  * @author milena
@@ -47,6 +54,11 @@ public class CadastroForm extends javax.swing.JFrame {
         cadastroSenha.setText("jPasswordField1");
 
         cadastrar.setText("Cadastrar");
+        cadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cadastrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -90,6 +102,23 @@ public class CadastroForm extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarActionPerformed
+        String nome = cadastroNome.getText();
+        String usuario = cadastroUsuario.getText();
+        String senha = cadastroSenha.getText();
+        
+        Aluno aluno = new Aluno(nome, usuario, senha);
+        Conexao conexao = new Conexao();
+        try {
+            Connection conn = conexao.getConnection();
+            AlunoDAO dao = new AlunoDAO(conn);
+            dao.inserir(aluno);
+            JOptionPane.showMessageDialog(null, "Cadastro concluído.", "Aviso!", JOptionPane.INFORMATION_MESSAGE);
+        } catch (SQLException ex) {
+            System.out.println("Falha na conexão.");
+        }
+    }//GEN-LAST:event_cadastrarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cadastrar;

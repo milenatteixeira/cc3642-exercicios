@@ -17,20 +17,20 @@ public class AlunoDAO {
     }
     
     public void inserir(Aluno aluno) throws SQLException{
-        String sql = "INSERT INTO aluno(nome, usuario, senha) "
-                + "VALUES('"+aluno.getNome()+"', '" 
-                + aluno.getUsuario()+ "', '" 
-                + aluno.getSenha()+"')";
+        String sql = "INSERT INTO aluno(nome, usuario, senha) VALUES(?, ?, ?)";
         PreparedStatement statement = conn.prepareStatement(sql);
+        statement.setString(1, aluno.getNome());
+        statement.setString(2, aluno.getUsuario());
+        statement.setString(3, aluno.getSenha());
         statement.execute();
         conn.close();
     }
     
     public ResultSet consultar(Aluno aluno) throws SQLException{
-        String sql = "SELECT * FROM aluno WHERE "
-                + "usuario = '"+aluno.getUsuario()+"'"
-                + "and senha = '"+aluno.getSenha()+"'";
+        String sql = "SELECT * FROM aluno WHERE usuario = ? and senha = ?";
         PreparedStatement statement = conn.prepareStatement(sql);
+        statement.setString(1, aluno.getUsuario());
+        statement.setString(2, aluno.getSenha());
         statement.execute();
         ResultSet resultado = statement.getResultSet();
         return resultado;

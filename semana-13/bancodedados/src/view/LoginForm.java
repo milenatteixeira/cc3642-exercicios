@@ -127,7 +127,8 @@ public class LoginForm extends javax.swing.JFrame {
             AlunoDAO dao = new AlunoDAO(conn);
             ResultSet res = dao.consultar(aluno);
             if(res.next()){
-                JOptionPane.showMessageDialog(null, "Login concluído.", "Logado", JOptionPane.INFORMATION_MESSAGE);
+                String nome = res.getString(1);
+                JOptionPane.showMessageDialog(null, "Login concluído. Bem vindo(a) "+nome+"!", "Logado", JOptionPane.INFORMATION_MESSAGE);
             }else{
                 JOptionPane.showMessageDialog(null, "Login não executado.", "Erro!", JOptionPane.ERROR_MESSAGE);
             }

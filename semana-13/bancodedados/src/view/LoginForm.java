@@ -5,13 +5,9 @@
  */
 package view;
 
-import dao.AlunoDAO;
-import dao.Conexao;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.ResultSet;
-import javax.swing.JOptionPane;
-import model.Aluno;
+import controller.ControllerLogin;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 /**
  *
@@ -24,6 +20,7 @@ public class LoginForm extends javax.swing.JFrame {
      */
     public LoginForm() {
         initComponents();
+        controller = new ControllerLogin(this);
     }
 
     /**
@@ -120,23 +117,28 @@ public class LoginForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void logarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logarActionPerformed
-        Aluno aluno = new Aluno(null, loginUsuario.getText(), loginSenha.getText());
-        Conexao conexao = new Conexao();
-        try {
-            Connection conn = conexao.getConnection();
-            AlunoDAO dao = new AlunoDAO(conn);
-            ResultSet res = dao.consultar(aluno);
-            if(res.next()){
-                String nome = res.getString(1);
-                JOptionPane.showMessageDialog(null, "Login concluído. Bem vindo(a) "+nome+"!", "Logado", JOptionPane.INFORMATION_MESSAGE);
-            }else{
-                JOptionPane.showMessageDialog(null, "Login não executado.", "Erro!", JOptionPane.ERROR_MESSAGE);
-            }
-        } catch (SQLException ex) {
-            System.out.println("Falha na conexão.");
-        }
+        controller.logar();
     }//GEN-LAST:event_logarActionPerformed
 
+    private ControllerLogin controller;
+
+    public JPasswordField getLoginSenha() {
+        return loginSenha;
+    }
+
+    public void setLoginSenha(JPasswordField loginSenha) {
+        this.loginSenha = loginSenha;
+    }
+
+    public JTextField getLoginUsuario() {
+        return loginUsuario;
+    }
+
+    public void setLoginUsuario(JTextField loginUsuario) {
+        this.loginUsuario = loginUsuario;
+    }
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

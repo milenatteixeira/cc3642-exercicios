@@ -5,12 +5,10 @@
  */
 package view;
 
-import dao.AlunoDAO;
-import dao.Conexao;
-import java.sql.Connection;
-import java.sql.SQLException;
-import javax.swing.JOptionPane;
-import model.Aluno;
+import controller.ControllerCadastro;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
 
 /**
  *
@@ -23,6 +21,7 @@ public class CadastroForm extends javax.swing.JFrame {
      */
     public CadastroForm() {
         initComponents();
+        controller = new ControllerCadastro(this);
     }
 
     /**
@@ -104,22 +103,36 @@ public class CadastroForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarActionPerformed
-        String nome = cadastroNome.getText();
-        String usuario = cadastroUsuario.getText();
-        String senha = cadastroSenha.getText();
-        
-        Aluno aluno = new Aluno(nome, usuario, senha);
-        Conexao conexao = new Conexao();
-        try {
-            Connection conn = conexao.getConnection();
-            AlunoDAO dao = new AlunoDAO(conn);
-            dao.inserir(aluno);
-            JOptionPane.showMessageDialog(null, "Cadastro concluído.", "Aviso!", JOptionPane.INFORMATION_MESSAGE);
-        } catch (SQLException ex) {
-            System.out.println("Falha na conexão.");
-        }
+        controller.salvarAluno();
     }//GEN-LAST:event_cadastrarActionPerformed
+    
+    private ControllerCadastro controller;
 
+    public JTextField getCadastroNome() {
+        return cadastroNome;
+    }
+
+    public void setCadastroNome(JTextField cadastroNome) {
+        this.cadastroNome = cadastroNome;
+    }
+
+    public JPasswordField getCadastroSenha() {
+        return cadastroSenha;
+    }
+
+    public void setCadastroSenha(JPasswordField cadastroSenha) {
+        this.cadastroSenha = cadastroSenha;
+    }
+
+    public JTextField getCadastroUsuario() {
+        return cadastroUsuario;
+    }
+
+    public void setCadastroUsuario(JTextField cadastroUsuario) {
+        this.cadastroUsuario = cadastroUsuario;
+    }
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cadastrar;
     private javax.swing.JTextField cadastroNome;
